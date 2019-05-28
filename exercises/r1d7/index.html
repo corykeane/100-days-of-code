@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<style>
+			.remove {
+				font-weight: bold;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div>
+			<h2>Vinalla JS To Do List</h2>
+			<p>This "To Do List" app was built with Vanilla JavaScript. This means that no libraries or frameworks were used. Rather, only native/built-in JavaScript functions and features are used.
+			</p>
+		</div>
+
+		<div>
+			<input id="newTaskInput" type="text" placeholder="Enter task here..">
+			<button onclick="toDoList.addItem()" id="newTaskButton" type="button">Add Task</button>
+		</div>
+
+		<div>
+			<h3>To Do List</h3>
+			<div id="tasks">
+
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			var toDoList = {
+				newTaskInput: document.getElementById('newTaskInput'),
+				newTaskButton: document.getElementById('newTaskButton'),
+				tasksDiv: document.getElementById('tasks'),
+				addItem: function() {
+					var pNode = document.createElement('p');
+					var checkboxNode = document.createElement('input');
+					checkboxNode.type = 'checkbox';
+
+					var removeNode = document.createElement('span');
+					removeNode.setAttribute('class', 'remove');
+					removeNode.setAttribute('onclick', 'toDoList.removeItem(this)');
+					var removeTextNode = document.createTextNode(' (x)');
+					removeNode.appendChild(removeTextNode);
+
+					var textNode = document.createTextNode(newTaskInput.value);
+					pNode.appendChild(checkboxNode);
+					pNode.appendChild(textNode);
+					pNode.appendChild(removeNode);
+
+
+					this.tasksDiv.appendChild(pNode);
+					this.newTaskInput.value = '';
+				},
+				removeItem: function(removeElement) {
+					console.log(removeElement.parentElement);
+					removeElement.parentElement.remove();
+				}
+			};
+		</script>
+	</body>
+</html>
